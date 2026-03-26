@@ -41,3 +41,39 @@ class BST:
         elif node.data < data:
             return self._search_recursive(node.right,data)
         return False
+    
+    def _min_value(self,node): # used to find the smallest value in the right tree to serve as a successor when deleting any node with two children
+        current = node
+        while current.left is not None:
+            current = current.left
+        return current.data
+    
+    def delete(self,data):
+        self.root = self._delete_recursive(self.root,data)
+
+    def _delete_recursive(self,node,data):
+        # base case - value not found
+        if node is None:
+            return None
+        
+        #traverse tree to find the node
+        if node.data > data:
+            node.left = self._delete_recursive(node.left,data)
+        elif node.data < data:
+            node.right = self._delete_recursive(node.right,data)
+        else:
+            # case 1 - node has no children
+            if node.left is None and node.right is None:
+                return None
+            
+            #case 2 - node has one child
+            if node.left is None:
+                return node.right
+            elif node.right is None:
+                return node.left
+            
+            # case 3 - node has two children
+            successor = self._min_value(node.right)
+            node.data = successor
+            node.right = self._delete_recursive(node.right,successor)
+        return node
