@@ -11,3 +11,11 @@ class LinkedList:
         new_node = Node(data)
         new_node.next = self.head
         self.head = new_node
+
+    def search(self,data):
+        current = self.head
+        while current is not None:
+            if current.data == data:
+                return True
+            current = current.next
+        return False
