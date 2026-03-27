@@ -26,3 +26,20 @@ def merge(left,right): # compares the first unsorted values of left[] vs right[]
     result += left[i:]
     result += right[j:]
     return result
+
+def binary_search(lst,target,low=0,high=None):
+    if high is None:
+        high = len(lst) - 1
+
+    # base case - target not found
+    if low > high:
+        return False
+
+    mid = (low + high) // 2
+
+    if lst[mid] == target: # target found exactly at midpoint
+        return True
+    elif lst[mid] > target: # target is in the left half of the list
+        return binary_search(lst,target,low,mid-1)
+    elif lst[mid] < target: # target is in the right half of the list
+        return binary_search(lst,target,mid+1,high)
