@@ -10,7 +10,9 @@ To run the tests:
 6. To run the unit tests for the merge sort and binary search algorithms, execute "python -m unittest tests_algorithms.py -v"
 7. Rejoice
 
+```
 ^..^      /
 /_/\_____/
    /\   /\
   /  \ /  \
+```
