@@ -1,5 +1,6 @@
 import unittest
 from algorithms import merge_sort, binary_search
+import random
 
 class TestAlgorithms(unittest.TestCase):
 
@@ -54,6 +55,18 @@ class TestAlgorithms(unittest.TestCase):
         self.assertTrue(result)
 
     # test binary search on the output of a merge sort
-    def test_merge_sort_binary_search(self):
+    def test_merge_sorted_binary_search(self):
         result = binary_search(merge_sort([4, 5, 1, 3, 2]), 3)
+        self.assertTrue(result)
+
+    # merge sort on a large randomly generated data set and compare it to the same list sorted by python's sorted function (should be identical)
+    def test_merge_sort_large_dataset(self):
+        randomised_list = [random.randint(0,9999) for _ in range(10000)]
+        result = merge_sort(randomised_list)
+        self.assertEqual(result, sorted(randomised_list))
+
+    # binary search on a large randomised data set after sorting with merge sort
+    def test_binary_search_large_sorted_dataset(self):
+        randomised_list = [random.randint(0,9999) for _ in range(10000)]
+        result = binary_search(merge_sort(randomised_list), randomised_list[0])
         self.assertTrue(result)

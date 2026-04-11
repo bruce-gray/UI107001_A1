@@ -1,5 +1,6 @@
 import unittest
 from bst import BST
+import random
 
 class TestBST(unittest.TestCase):
 
@@ -116,3 +117,21 @@ class TestBST(unittest.TestCase):
         bst = BST()
         self.assertFalse(bst.search(1))
         bst.delete(1)
+
+    # insert and search with a large randomised data set
+    def test_large_dataset_search(self):
+        bst = BST()
+        randomised_list = [random.randint(0,9999) for _ in range(10000)]
+        for i in randomised_list:
+            bst.insert(i)
+        self.assertTrue(bst.search(randomised_list[0])) # searching for the first randomly generated value
+
+    # delete from a large randomised data set
+    def test_large_dataset_delete(self):
+        bst = BST()
+        randomised_list = [random.randint(0,9999) for _ in range(10000)]
+        for i in randomised_list:
+            bst.insert(i)
+        self.assertTrue(bst.search(randomised_list[0]))
+        bst.delete(randomised_list[0])
+        self.assertFalse(bst.search(randomised_list[0]))

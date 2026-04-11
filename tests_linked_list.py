@@ -73,5 +73,23 @@ class TestLinkedList(unittest.TestCase):
         ll = LinkedList()
         ll.delete(5)
 
+    # insert and search a large data set
+    def test_large_dataset_search(self):
+        ll = LinkedList()
+        for i in range(10000):
+            ll.insert(i)
+        self.assertTrue(ll.search(9999))
+        self.assertFalse(ll.search(10000))
+
+    # delete from a large data set
+    def test_large_dataset_delete(self):
+        ll = LinkedList()
+        for i in range(10000):
+            ll.insert(i)
+        self.assertTrue(ll.search(6767))
+        ll.delete(6767)
+        self.assertFalse(ll.search(6767))
+        
+
 if __name__ == "__main__":
     unittest.main()
